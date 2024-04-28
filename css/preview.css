@@ -15,7 +15,9 @@
 */
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2; /* Light gray background */
+  color: #333; /* Dark text color */
 }
 
 .preview {
@@ -26,4 +28,17 @@ body {
 img, video {
   max-width: 100%;
   height: auto;
+}
+
+
+.container {
+  max-width: 800px; /* Set maximum width for content */
+  margin: 0 auto; /* Center content horizontally */
+  padding: 20px; /* Add some padding around content */
+  background-color: #fff; /* White background for content area */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  text-align: center;
+}
+.ds-heading{
+  display: inline-block;
 }
