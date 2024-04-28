@@ -13,26 +13,20 @@
  See the License for the specific language governing permissions and
  limitations under the License.
  */
-//asdda
- import { openDB } from 'idb';
- import { marked } from 'marked';
- import { wrap, proxy } from 'comlink';
 
- window.addEventListener('DOMContentLoaded', async () => {
-   const preview = document.querySelector('.preview');
-   const db = await openDB('settings-store');
-   const content = (await db.get('settings', 'content')) || '';
-   
-   preview.innerHTML = marked(content);
- 
-   const workerURL = new URL('./worker.js', import.meta.url);
-   const worker = new SharedWorker(workerURL);
-   const compiler = wrap(worker.port);
- 
-   const updatePreview = proxy(async (data) => {
-     preview.innerHTML = marked(data.compiled);
-   });
- 
-   compiler.subscribe(updatePreview);
- });
- 
+import { wrap, proxy } from 'comlink';
+
+window.addEventListener('DOMContentLoaded', async () => {
+  const preview = document.querySelector('.preview');
+
+  const worker = new SharedWorker(new URL('./worker.js', import.meta.url), {
+    type: 'module',
+  });
+  const compiler = wrap(worker.port);
+
+  compiler.subscribe(
+    proxy((data) => {
+      preview.innerHTML = data.compiled;
+    }),
+  );
+});

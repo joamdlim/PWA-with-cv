@@ -22,7 +22,6 @@ import { strategy as streamsStrategy } from 'workbox-streams';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { openDB } from 'idb';
 import { marked } from 'marked';
-import { wrap } from 'comlink';
 
 // Set up page cache
 const pageCache = new CacheFirst({
